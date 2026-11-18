@@ -4,8 +4,12 @@ version = "0.1.0"
 description = "Pizarra LaTeX, by mfc"
 readme = "README.md"
 requires-python = ">=3.13"
+
 dependencies = [
     "streamlit>=1.53.0",
+    "streamlit-drawable-canvas",
+    "Pillow",
+    "matplotlib",
 ]
 
 [tool.uv]
