@@ -3,4 +3,3 @@ streamlit-drawable-canvas
 Pillow
 matplotlib
 plotly
-CoolProp.CoolProp
