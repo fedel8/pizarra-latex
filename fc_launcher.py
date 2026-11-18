@@ -17,7 +17,7 @@ APPS = [
         "categoria": "Matemáticas",
         "icono": "📈",
         "descripcion": "Visualización interactiva de curvas paramétricas.",
-        "url": "https://fedel8-1.streamlit.app/",
+        "url": "https://curvas-param.streamlit.app/",
     },
    
 ]
