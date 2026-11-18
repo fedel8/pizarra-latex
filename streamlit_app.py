@@ -21,7 +21,7 @@ if "canvas_key" not in st.session_state:
 # 1. Parámetros en la barra lateral
 with st.sidebar:
     st.header("Estilo de Ecuación")
-    f_size = st.slider("Tamaño de fuente LaTeX", 20, 80, 40)
+    f_size = st.slider("Tamaño de fuente LaTeX", 10, 80, 20)
     f_color = st.color_picker("Color de letra LaTeX", "#000000")
     f_alpha = st.slider("Opacidad de la ecuación (Alpha)", 0.0, 1.0, 1.0, 0.1)
     
