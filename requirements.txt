@@ -2,3 +2,5 @@ streamlit>=1.53.0
 streamlit-drawable-canvas
 Pillow
 matplotlib
+plotly
+CoolProp.CoolProp

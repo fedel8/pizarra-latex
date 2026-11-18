@@ -11,14 +11,27 @@ APPS = [
         "descripcion": "Renderiza fórmulas LaTeX y permite agregar trazos a mano alzada.",
         "url": "https://pizarra-latex.streamlit.app/",
     },
-    
+    {
+        "nombre": "Multiplot - MultiCSV",
+        "categoria": "Gráficas",
+        "icono": "📈",
+        "descripcion": "Permite cargar y graficar múltiples dataset de diferentes csv.",
+        "url": "https://multiplot-multicsv.streamlit.app/",
+    },    
     {
         "nombre": "Graficador de Funciones 3D",
         "categoria": "Matemáticas",
-        "icono": "📈",
+        "icono": "🪡️",
         "descripcion": "Visualización interactiva de curvas paramétricas.",
         "url": "https://curvas-param.streamlit.app/",
     },
+    {
+        "nombre": "Compresibilidad - Mezclas",
+        "categoria": "Física",
+        "icono": "🏮️",
+        "descripcion": "Computa la compresibilidad en mezclas de alcanos",
+        "url": "https://compresibilidad-mezclas.streamlit.app/",
+    },        
    
 ]
 
