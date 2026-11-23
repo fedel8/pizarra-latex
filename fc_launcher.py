@@ -32,7 +32,13 @@ APPS = [
         "descripcion": "Computa la compresibilidad en mezclas de alcanos",
         "url": "https://compresibilidad-mezclas.streamlit.app/",
     },        
-   
+    {
+        "nombre": "FCalc++",
+        "categoria": "Física",
+        "icono": "📟️",
+        "descripcion": "Evalúa fórmulas con control de unidades",
+        "url": "https://fcalc++.streamlit.app/",
+    },     
 ]
 
 # 2. Encabezado y barra de búsqueda
