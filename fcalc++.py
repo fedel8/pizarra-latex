@@ -1,3 +1,4 @@
+import re
 import streamlit as st
 import pint
 import sympy as sp
@@ -49,7 +50,6 @@ MAGNITUDES = {
     "Volumen": ["m**3", "L", "mL", "cm**3", "ft**3", "gal"]
 }
 
-# Inicializar estado de sesión para guardar el resultado calculado
 if "resultado_calculado" not in st.session_state:
     st.session_state.resultado_calculado = None
 
@@ -69,7 +69,6 @@ st.subheader("1. Definición de Parámetros")
 parametros_definidos = {}
 etiquetas_repetidas = False
 
-# --- CREACIÓN DINÁMICA DE PARÁMETROS (SIN x_1 EXTRA) ---
 for i in range(num_params):
     with st.container(border=True):
         col_lat, col_prev, col_val, col_mag, col_uni = st.columns([2, 1.2, 1.3, 1.5, 1.5])
@@ -133,13 +132,25 @@ formula_str = st.text_input(
     help="Ejemplo: 0.5 * \\rho * v**2. Operadores: +, -, *, /, ** (potencia), sqrt(), sin(), cos(), pi"
 )
 
-# Función auxiliar para evaluar reemplazando cadenas LaTeX por tokens internos seguros
+def formatear_formula_latex(formula: str) -> str:
+    latex_expr = formula.strip()
+    if not latex_expr:
+        return ""
+    latex_expr = re.sub(r"\*\*\s*\{([^}]+)\}", r"^{\1}", latex_expr)
+    latex_expr = re.sub(r"\*\*\s*\(([^)]+)\)", r"^{\1}", latex_expr)
+    latex_expr = re.sub(r"\*\*\s*([a-zA-Z0-9_.-]+)", r"^{\1}", latex_expr)
+    latex_expr = latex_expr.replace("*", r" \cdot ")
+    return latex_expr
+
+vista_formula = formatear_formula_latex(formula_str)
+if vista_formula:
+    st.caption("Vista previa de la fórmula:")
+    st.latex(vista_formula)
+
 def evaluar_expresion_latex(formula, params_dict):
     formula_procesada = formula
     mapa_tokens = {}
     
-    # Ordenar etiquetas de mayor a menor longitud para evitar reemplazos parciales
-    # (ej. evitar que 'v' reemplace parte de 'v_0')
     etiquetas_ordenadas = sorted(params_dict.keys(), key=len, reverse=True)
     
     for idx, etiqueta in enumerate(etiquetas_ordenadas):
@@ -148,7 +159,6 @@ def evaluar_expresion_latex(formula, params_dict):
             formula_procesada = formula_procesada.replace(etiqueta, token)
             mapa_tokens[token] = params_dict[etiqueta]
             
-    # Parsear con SymPy
     expr = sp.sympify(formula_procesada)
     
     entorno = {
@@ -193,7 +203,6 @@ if st.session_state.resultado_calculado is not None:
     st.divider()
     st.subheader("3. Resultado y Conversión de Unidades")
     
-    # Buscar todas las unidades compatibles en nuestro diccionario
     unidades_compatibles = []
     for lista_u in MAGNITUDES.values():
         for u_cand in lista_u:
@@ -203,8 +212,6 @@ if st.session_state.resultado_calculado is not None:
             except Exception:
                 pass
                 
-    # Asegurar que la unidad base actual esté incluida
-    unidad_actual_str = f"{res_base.units:~P}"
     if not unidades_compatibles:
         opciones_salida = [str(res_base.units)]
     else:
