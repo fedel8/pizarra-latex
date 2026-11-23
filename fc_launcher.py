@@ -37,7 +37,7 @@ APPS = [
         "categoria": "Física",
         "icono": "📟️",
         "descripcion": "Evalúa fórmulas con control de unidades",
-        "url": "https://fcalc++.streamlit.app/",
+        "url": "https://fcalcpp.streamlit.app/",
     },     
 ]
 
